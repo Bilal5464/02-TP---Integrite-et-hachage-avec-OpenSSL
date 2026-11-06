@@ -1,0 +1,109 @@
+================================================================================
+                    RÉPONSES DU TP - AUDIT DE SÉCURITÉ GIT
+================================================================================
+
+--------------------------------------------------------------------------------
+Question 1.a
+--------------------------------------------------------------------------------
+Commandes / Vérification :
+$ cat config/.env
+
+Réponse :
+Oui, la présence du fichier `config/.env` est anormale.
+Il contient des secrets en clair (mots de passe de base de données, jetons d'API, identifiants SMTP).
+Cela expose l'infrastructure à une fuite globale.
+Règle de sécurité : Un fichier `.env` doit toujours rester local et ne jamais être commité dans Git.
+
+--------------------------------------------------------------------------------
+Question 2
+--------------------------------------------------------------------------------
+Réponse :
+Le fichier qui a disparu du dossier de travail mais qui reste présent dans l'historique est :
+`data/export-clients.csv`
+
+--------------------------------------------------------------------------------
+Question 3
+--------------------------------------------------------------------------------
+Réponse a :
+- Commit qui ajoute le fichier suspect (`data/export-clients.csv`) :
+  Hash : 7917ebb
+  Message : "Ajoute un export clients pour tester l'import CSV"
+
+- Commit qui prétend le retirer :
+  Hash : 4e389b5
+  Message : "Retire l'export clients (donnees reelles, alerte du DPO)"
+
+Réponse b :
+- Auteur : Karim Bouaziz
+- E-mail : k.bouaziz@mycallcenter.fr
+- Date et heure : Lundi 19 janvier 2026 à 16:47:00 (+0100)
+
+--------------------------------------------------------------------------------
+Question 4
+--------------------------------------------------------------------------------
+Réponse :
+Nombre de commits concernés :
+- Pour "num_secu" : 2 commits (7917ebb et 4e389b5).
+- Pour "DB_PASSWORD" : 1 commit (7c5d661).
+
+Ce que montre la recherche sur DB_PASSWORD :
+Le mot de passe a été introduit dans le commit 7c5d661 ("Ajoute la configuration de connexion a la base").
+Un seul commit apparaît dans la recherche, ce qui signifie que le secret n'a jamais été supprimé ni modifié par la suite. Contrairement à l'export client qui a fait l'objet d'une tentative de suppression, la fuite du mot de passe est toujours active et présente dans l'historique sans aucune mesure corrective.
+
+--------------------------------------------------------------------------------
+Question 5
+--------------------------------------------------------------------------------
+Classification des colonnes :
+
+colonne            | categorie | justification
+-------------------|-----------|--------------------------------------------------------------------------------
+id                 | NP        | Identifiant technique interne ne permettant pas d'identifier un individu seul.
+nom, prenom        | DIR       | Identifie directement la personne physique de manière explicite.
+email              | DIR       | Permet d'identifier ou de contacter directement l'individu.
+code_postal        | IND       | Permet de géolocaliser indirectement un individu en croisant avec d'autres données.
+ip_connexion       | IND       | Adresse IP traçable permettant d'identifier indirectement un utilisateur.
+id_cookie          | IND       | Identifiant unique de traçage permettant de reconnaître indirectement un profil.
+num_secu           | SENS      | Donnée de santé / identifiant national unique hautement critique (Art. 9).
+carte_bancaire     | IND       | Donnée financière hautement confidentielle rattachée à un titulaire.
+commentaire_libre  | SENS      | Révèle des données sensibles (santé/handicap, opinions syndicales, religion).
+
+Analyse des commentaires libres :
+- Ligne 1001 (Claire Dupont) : SENS (Donnée de santé / handicap — déplacement en fauteuil roulant).
+- Ligne 1002 (Thomas Nguyen) : SENS (Conviction religieuse — pas d'appel le samedi).
+- Ligne 1003 (Ana Berthier) : SENS (Appartenance syndicale — déléguée syndicale).
+- Ligne 1004 (Marc Lopes) : NP (Indication administrative générique "RAS").
+- Ligne 1005 (Sophie Fontaine) : NP (Simple consigne d'horaire d'appel).
+
+Analyse du fichier data/jeu-de-test.csv :
+Le fichier `data/jeu-de-test.csv` ne contient AUCUNE donnée personnelle. 
+Les données sont anonymes et agrégées : les identifiants réels ont disparu, les âges sont regroupés par tranches (ex: 25-34), les localisations sont réduites au seul numéro de département (75, 69, 33...) et les actions sont comptabilisées sous forme de totaux (`nb_reponses`). Il est strictement impossible d'identifier ou de réidentifier une personne physique à partir de ces informations.
+
+--------------------------------------------------------------------------------
+Question 6
+--------------------------------------------------------------------------------
+Réponse a :
+Un commit de suppression (`git rm`) retire le fichier du dossier de travail actuel mais le conserve intact dans l'historique Git. Pour satisfaire le droit à l'effacement (Art. 17 RGPD), il faut réécrire tout l'historique (avec `git filter-repo` ou `BFG`), forcer la mise à jour du dépôt distant (`git push --force`) et faire recloner le projet à l'ensemble des développeurs.
+
+Réponse b :
+Le message laisse croire que la fuite a été corrigée suite à l'alerte du DPO, alors que le fichier de données personnelles reste intégralement accessible et récupérable dans l'historique par quiconque accède au dépôt.
+
+--------------------------------------------------------------------------------
+Question 7
+--------------------------------------------------------------------------------
+Réponse a :
+Non. La règle `data/export-*.csv` ajoutée dans le `.gitignore` indique à Git d'ignorer ces fichiers pour les futurs commits. Git ne les proposera plus lors d'un `git add`.
+
+Réponse b :
+Non, le mot de passe n'est pas effacé de l'historique car le `.gitignore` ne protège que les commits futurs. Un secret déjà présent dans un commit antérieur reste lisible. En environnement réel, un secret divulgué doit être immédiatement révoqué et modifié au niveau du serveur/service concerné.
+
+--------------------------------------------------------------------------------
+AUTO-ÉVALUATION AVANT DE RENDRE
+--------------------------------------------------------------------------------
+Vérification                                                        | OK ?
+--------------------------------------------------------------------|------
+J'ai retrouvé le fichier supprimé et le fichier de secrets          | [oui]
+J'ai classé chaque colonne avec la grille NP / DIR / IND / SENS      | [oui]
+J'ai repéré les données sensibles cachées dans le champ libre       | [oui]
+Je sais expliquer pourquoi git rm n'efface pas une donnée           | [oui]
+Mon rapport ne recopie aucune valeur personnelle                    | [oui]
+Je n'ai pas poussé mycom-audit sur GitHub                           | [oui]

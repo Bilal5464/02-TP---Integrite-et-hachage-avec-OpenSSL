@@ -1,0 +1,3 @@
+le raide permet d'avoir une redondance des donné afin d'éviter de perdre des donné afin d'éviter de perdre des donnée ou d'avoir une coupure d'activité si un disque crash.
+généralement on ne pas du raide sur un ordinateur personnel (sauf éventuellement sur le pc d'un vip). le raide ce mais plutôt ce mais sur serveur qui stockera les donné d'un
+utilisateur

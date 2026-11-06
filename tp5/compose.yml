@@ -1,0 +1,49 @@
+# =====================================================================
+#  Pile Docker DÉDIÉE au module SQL S1 — PostgreSQL 16
+# ---------------------------------------------------------------------
+#  Conçue pour être *isolée* des autres conteneurs (PHP, Bloc2, Bloc3…) :
+#    - nom de projet propre ......... sql-cours
+#    - nom de conteneur propre ...... sql_cours_db
+#    - port hôte inhabituel ......... 5440  (5432/5433 sont souvent déjà pris)
+#    - volume de données propre ..... sql_cours_pgdata
+#  Aucun risque de doublon tant que ces 4 éléments restent uniques.
+#
+#  DÉMARRER (depuis le dossier module-sql-s1) :
+#    docker compose -f docker/compose.yml up -d
+#  ARRÊTER (les données restent) :
+#    docker compose -f docker/compose.yml down
+#  TOUT REMETTRE À ZÉRO (⚠ efface les données) :
+#    docker compose -f docker/compose.yml down -v
+# =====================================================================
+
+name: sql-cours          # nom de projet Compose dédié (évite tout mélange)
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: sql_cours_db          # nom unique et parlant
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: prof_sio
+      POSTGRES_PASSWORD: prof_sio         # base LOCALE d'apprentissage
+      POSTGRES_DB: sql_cours
+      TZ: Europe/Paris
+    ports:
+      # hôte:conteneur — on expose 5440 côté PC pour ne PAS entrer en
+      # conflit avec un autre PostgreSQL déjà sur 5432 ou 5433.
+      - "5440:5432"
+    volumes:
+      # 1) Persistance des données dans un volume nommé dédié.
+      - sql_cours_pgdata:/var/lib/postgresql/data
+      # 2) Chargement AUTOMATIQUE des jeux de données du cours au tout
+      #    premier démarrage (volume vide) : cinema, football, ecole, geo.
+      #    (Ces fichiers créent chacun leur propre schéma.)
+      - ./scripts:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U prof_sio -d sql_cours"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  sql_cours_pgdata:

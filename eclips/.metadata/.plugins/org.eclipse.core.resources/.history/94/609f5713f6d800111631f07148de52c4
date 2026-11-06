@@ -1,0 +1,18 @@
+package Groupe1;
+
+import java.util.Scanner;
+
+public class Exercice1 {
+
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        int Nb;
+        System.out.println("Quel est votre Nombre ?");
+        Nb = sc.nextInt();
+        if(Nb > 0) System.out.println("Votre Nombre est positif");
+        else if (Nb < 0) System.out.println("Votre Nombre est Négatif");
+            else System.out.println("Votre nombre est Nul");
+    }
+
+}

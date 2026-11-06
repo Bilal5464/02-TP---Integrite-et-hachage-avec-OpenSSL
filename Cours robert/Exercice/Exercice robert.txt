@@ -1,0 +1,73 @@
+Question1 n1
+
+Elle sont séparée par des point virgule
+ainsi que des retours a la ligne
+
+Question1 n2
+
+Non
+
+Question1 n3
+
+Il y'a un risque que les 2 personnes font les même chose est que ca donne n'importe quoi ou baisse la productivité
+c'est pas partagé avec la personne c'est seulement local
+
+Question1 n4
+
+Le problèmes c'est que y'a pas la liste des acteur la solution serait de rajouter la liste des acteur dans la colonne tout en haut par des point virgules
+
+_____________________________________________________________________________
+
+Question2 n1
+
+oui les json le distingue car ce qui distingue les chiffres et les lettres sont les guillemet "
+
+Question2 n2
+
+Non ca serait pas possible pour celui du haut a part si on fait le nécessaire si on veut le faire faut rajouter les parenthèse pour l'indiqué.
+
+Question2 n3
+
+La devise de base est l'euro le dollar vaut aujourd'hui 1.159 dollar
+
+Question2 n4
+
+J'ai juste rajouter dans l'url chf et ca ma donné le résultat
+
+Question2 n5
+
+non il valait moins avant que maintenant donné trouvé 1.1193 nouvelle 1.159
+
+Question2 n6
+
+On a pas besoin de stocker les informations sur sont pc et l'inconvénient sur le site tombe en panne je peut plus l'utilisé
+
+Question2 n7
+
+C'est les même donné sur internet et le cmd avec curl
+
+Question n2 n8
+
+En euros le bitcoin vau 67059 oui le json est imbriqué
+
+Question n2 bonus
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+package Exercices;
+import java.util.Scanner;
+public class Exemplejava {
+	
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int Age;
+		System.out.println("Quel est votre âge ?");
+		Age = sc.nextInt();
+		if (Age >= 18) System.out.println("Vous êtes majeur-e");
+		else System.out.println("Vous êtes mineur-e");
+	}
+}

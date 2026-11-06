@@ -1,0 +1,11 @@
+# Note au DPO : Analyse de risques de la chaîne Git
+
+La chaîne Git du dépôt `bloc3-cyber` repose sur plusieurs biens supports, notamment le poste de travail local, le dépôt distant GitHub et l'historique des commits[cite: 3]. Elle manipule des données personnelles, incluant des noms, des e-mails et un fichier CSV d'atelier[cite: 3, 4].
+
+L'audit de la chaîne a mis en évidence trois vulnérabilités principales : un dépôt distant configuré en mode public, un fichier `.gitignore` incomplet ne couvrant pas les fichiers de configuration sensible, et l'absence de protection sur la branche `main`[cite: 4, 11, 12].
+
+La hiérarchisation des risques positionne en priorité absolue l'exposition des données personnelles dans l'historique d'un dépôt public (R5) ainsi que le risque d'écrasement de l'historique distant (R4)[cite: 5, 6].
+
+Le plan de traitement adopté consiste à réduire ces risques par des mesures correctives outillées[cite: 6]. La mesure prioritaire relative à la sécurisation des accès et des branches a été immédiatement appliquée sur le dépôt.
+
+Le risque résiduel associé aux traces anciennes présentes dans l'historique public est accepté, car les données manipulées restent fictives ou non critiques pour l'organisation.

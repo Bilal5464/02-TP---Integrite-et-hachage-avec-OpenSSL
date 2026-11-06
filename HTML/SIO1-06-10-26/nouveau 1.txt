@@ -1,0 +1,16 @@
+<HTML>
+<HTML>
+<HEAD>
+<TITLE> Voici le menu  </TITLE>
+</HEAD>
+<BODY>
+<CENTER> <H1> <FONT COLOR="PURPLE" > MENU >/FONT> </H1> </CENTER>
+<BR>
+<OL>
+     <LI> Ma passion </LI>
+	 <LI> Ma recettte </LI>
+	 <LI> Mon programme </LI>
+	 <LI> Quitter </LI>
+</OL>
+</BODY>
+</HTML>

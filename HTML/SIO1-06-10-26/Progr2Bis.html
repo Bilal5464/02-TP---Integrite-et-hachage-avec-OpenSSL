@@ -1,0 +1,70 @@
+<HTML>
+<HEAD>
+<TITLE> Liens hypertexte </TITLE>
+</HEAD>
+<BODY>
+<CENTER> <B> <U> <FONT COLOR = "997A9D"> Lien à travers une image </FONT> </U> </B> </CENTER>
+<A HREF="http://www.monoprix.fr"> <IMG SRC="Chien.jpg" ALT="Voici mon chien" TITLE="C'est un chiot"> </A>
+<BR>
+<CENTER> <B> <U> <FONT COLOR = "997A9D"> Lien vers une autre page WEB </FONT> </U> </B> </CENTER>
+<BR>
+<A HREF="ProgrammeBis.html"> Cliquez ici pour visiter la page Web du gâteau au chocolat </A>
+<HR>
+<CENTER> <B> <U> <FONT COLOR = "997A9D"> Le formulaire </FONT> </U> </B> </CENTER>
+<BR>
+<FORM NAME="UnFormulaire" ACTION="ProgrammePHPquivatraiterlesdonnéesaisies.php" METHOD="POST">
+<TABLE BORDER="0" WIDTH="50%">
+<TR>
+    <TD> Veuillez saisir votre nom </TD>
+    <TD> <INPUT TYPE="TEXT" NAME="LeNom"> </TD>
+</TR>
+<TR>
+    <TD> Veuillez saisir votre prénom </TD>
+    <TD> <INPUT TYPE="TEXT" NAME="LePrenom"> </TD>
+</TR>
+<TR>
+    <TD> Etes-vous étudiant ? </TD>
+    <TD>
+        <INPUT TYPE="RADIO" NAME="Etudiant" VALUE="OUI" CHECKED> OUI
+        <INPUT TYPE="RADIO" NAME="Etudiant" VALUE="NON"> NON
+    </TD>
+</TR>
+<TR>
+    <TD> Quelle est votre pizza préférée ? </TD>
+    <TD>
+        <SELECT NAME="Pizza">
+            <OPTION> Reine </OPTION>
+            <OPTION> 4 Fromages </OPTION>
+            <OPTION> 4 Saisons </OPTION>
+            <OPTION> Végétarienne </OPTION>
+        </SELECT>
+    </TD>
+</TR>
+<TR>
+    <TD> Dans quelle classe êtes-vous ? </TD>
+    <TD> <INPUT TYPE="CHECKBOX" NAME="Classe1"> SIO1 <INPUT TYPE="CHECKBOX" NAME="Classe2"> SIO2 </TD>
+</TR>
+<TR>
+    <TD> Quel est votre code postal ? </TD>
+    <TD> <INPUT TYPE="TEXT" NAME="CP" SIZE="10" MAXLENGTH="5"> </TD>
+</TR>
+<TR>
+    <TD> Exprimez vous ! </TD>
+    <TD> <TEXTAREA COLS="15" ROWS="10"> Ecrivez ici </TEXTAREA> </TD>
+</TR>
+<TR>
+    <TD> <INPUT TYPE="RESET" VALUE="Effacer"> </TD>
+    <TD> <INPUT TYPE="SUBMIT" VALUE="Envoyer"> </TD>
+</TR>
+</TABLE>
+</FORM>
+<HR>
+<CENTER> <B> <U> <FONT COLOR = "997A9D"> Le mappage d'image </FONT> </U> </B> </CENTER>
+<BR>
+<MAP NAME="ZoneClic">
+<AREA SHAPE="RECT" COORDS="0,0,75,50" HREF="https://www.monoprix.fr">
+<AREA SHAPE="RECT" COORDS="0,0,100,50" HREF="https://www.youtube.com">
+</MAP>
+<IMG SRC="Chien.jpg" USEMAP="#ZoneClic">
+</BODY>
+</HTML>

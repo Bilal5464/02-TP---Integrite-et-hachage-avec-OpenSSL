@@ -1,0 +1,1 @@
+SHA2-256(messageAuxSIO.txt)= 278cad15062b9f764cdd5df49c6490ceb84b23c8b8af714ebf922c3ecdf65fcc
